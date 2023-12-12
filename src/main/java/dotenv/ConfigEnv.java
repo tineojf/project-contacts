@@ -14,7 +14,11 @@ public class ConfigEnv {
         return instance;
     }
 
-    public String get(String key) {
-        return dotenv.get(key);
+    public String get(String key) throws RuntimeException {
+        if (dotenv.get(key) == null) {
+            throw new RuntimeException("Key not found " + key);
+        } else {
+            return dotenv.get(key);
+        }
     }
 }
