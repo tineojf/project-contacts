@@ -4,7 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConfigEnv {
     private static final ConfigEnv instance = new ConfigEnv();
-    public Dotenv dotenv;
+    private final Dotenv dotenv;
 
     private ConfigEnv() {
         dotenv = Dotenv.configure().directory("./config").load();
