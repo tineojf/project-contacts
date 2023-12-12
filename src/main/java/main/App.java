@@ -1,4 +1,4 @@
-package tineo;
+package main;
 
 /**
  * Hello world!

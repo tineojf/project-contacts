@@ -1,4 +1,4 @@
-package tineo;
+package main;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
