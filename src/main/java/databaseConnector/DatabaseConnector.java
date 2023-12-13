@@ -1,6 +1,5 @@
 package databaseConnector;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import dotenv.ConfigEnv;
 
 import java.sql.*;
