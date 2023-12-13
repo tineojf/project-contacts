@@ -1,7 +1,9 @@
 package main;
 
+import dao.ContactDao;
 import databaseConnector.DatabaseConnector;
 import dotenv.ConfigEnv;
+import models.ContactModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,20 +25,16 @@ public class App {
             DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
             Connection connection = databaseConnector.getConnection();
 
-            // Demo de Statement
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + databaseTableUsers);
-            while (rs.next()) {
-                int x = rs.getInt("id");
-                String s = rs.getString("nombre");
-                System.out.println("ID: " + x + " Name: " + s);
-            }
+            // Demo de Statement - POST
+            ContactModel contact = new ContactModel(1, "Juan", "Perez", "999888777", "email@gmail.com");
+            ContactDao contactDao = new ContactDao();
+//            contactDao.postContact(contact);
 
             // Demo de DatabaseConnector closeConnection
             databaseConnector.closeConnection();
 
             System.out.println("Hola");
-        } catch (RuntimeException | ClassNotFoundException | SQLException e) {
+        } catch (RuntimeException | ClassNotFoundException e) {
             System.err.println("Error en la aplicación: " + e.getMessage());
         }
     }

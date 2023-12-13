@@ -1,6 +1,6 @@
 package models;
 
-public class Contact {
+public class ContactModel {
     private int id;
     private String name;
     private String lastName;
@@ -8,7 +8,7 @@ public class Contact {
     private String phone;
 
     // Constructor
-    public Contact(int id, String name, String lastName, String email, String phone) {
+    public ContactModel(int id, String name, String lastName, String email, String phone) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
