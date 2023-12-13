@@ -1,5 +1,6 @@
 package databaseConnector;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import dotenv.ConfigEnv;
 
 import java.sql.*;
@@ -34,8 +35,11 @@ public class DatabaseConnector {
             connection = DriverManager.getConnection(url, user, password);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             System.out.println("SQLException: " + e.getMessage());
+        } catch (Exception e) {
+//            e.printStackTrace();
+            System.out.println("Exception: " + e.getMessage());
         }
         return connection;
     }
@@ -47,7 +51,6 @@ public class DatabaseConnector {
                 System.out.println("Conexión cerrada");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             System.out.println("SQLException: " + e.getMessage());
         }
     }
