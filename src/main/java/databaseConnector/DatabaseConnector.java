@@ -5,17 +5,19 @@ import dotenv.ConfigEnv;
 import java.sql.*;
 
 public class DatabaseConnector {
-    private static final DatabaseConnector instance = new DatabaseConnector();
+    private static DatabaseConnector instance;
     private Connection connection = null;
 
     private DatabaseConnector() {
-        if (instance != null) {
-            throw new IllegalStateException("Ya existe una instancia de DatabaseConnector");
-        }
+        instance = new DatabaseConnector();
     }
 
     public static DatabaseConnector getInstance() {
-        return instance;
+        if (instance == null) {
+            return new DatabaseConnector();
+        } else {
+            return instance;
+        }
     }
 
     public Connection getConnection() {
