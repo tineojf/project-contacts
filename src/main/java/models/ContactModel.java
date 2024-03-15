@@ -1,7 +1,7 @@
 package models;
 
 public class ContactModel {
-    private int id;
+    private final int id;
     private String name;
     private String lastName;
     private String email;
@@ -19,10 +19,6 @@ public class ContactModel {
     // Getters
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
