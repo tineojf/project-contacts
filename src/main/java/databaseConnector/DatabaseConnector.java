@@ -22,22 +22,28 @@ public class DatabaseConnector {
         ConfigEnv configEnv = ConfigEnv.getInstance();
 
         try {
-            String url = "jdbc:mysql://"
-                    + configEnv.get("DATABASE_HOST")
-                    + ":"
-                    + configEnv.get("DATABASE_PORT")
-                    + "/"
-                    + configEnv.get("DATABASE_NAME");
-            String user = configEnv.get("DATABASE_USER");
-            String password = configEnv.get("DATABASE_PASSWORD");
+            String databaseHost = configEnv.get("DATABASE_HOST");
+            String databasePort = configEnv.get("DATABASE_PORT");
+            String databaseName = configEnv.get("DATABASE_NAME");
+            String databaseUser = configEnv.get("DATABASE_USER");
+            String databasePassword = configEnv.get("DATABASE_PASSWORD");
 
-            connection = DriverManager.getConnection(url, user, password);
+            if (databaseHost == null || databasePort == null || databaseName == null || databaseUser == null || databasePassword == null) {
+                throw new IllegalStateException("Error en la configuración de la base de datos");
+            }
+
+            String databaseURL = "jdbc:mysql://" + databaseHost + ":" + databasePort + "/" + databaseName;
+
+            connection = DriverManager.getConnection(databaseURL, databaseUser, databasePassword);
 
         } catch (SQLException e) {
-//            e.printStackTrace();
+            //e.printStackTrace();
             System.out.println("SQLException: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            //e.printStackTrace();
+            System.out.println("IllegalStateException: " + e.getMessage());
         } catch (Exception e) {
-//            e.printStackTrace();
+            //e.printStackTrace();
             System.out.println("Exception: " + e.getMessage());
         }
         return connection;
