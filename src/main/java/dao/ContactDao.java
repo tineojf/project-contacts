@@ -34,7 +34,7 @@ public class ContactDao {
         DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
         Connection connection = databaseConnector.getConnection();
 
-        ArrayList<ContactModel> contacts = new ArrayList<ContactModel>();
+        ArrayList<ContactModel> contacts = new ArrayList<>();
 
         String query = "SELECT * FROM " + databaseTableContact;
 
