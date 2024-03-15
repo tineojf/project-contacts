@@ -6,6 +6,7 @@ import dotenv.ConfigEnv;
 import models.ContactModel;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -21,15 +22,24 @@ public class App {
             DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
             Connection connection = databaseConnector.getConnection();
 
-            // Demo de Statement - POST
+            // Demo de ContactModel
             ContactModel contact = new ContactModel(1, "Juan", "Perez", "999888777", "email@gmail.com");
+
+            // Demo de ContactDao
             ContactDao contactDao = new ContactDao();
+
+            // Demo de Statement - POST
             //contactDao.postContact(contact);
 
-            // Demo de DatabaseConnector closeConnection
-            databaseConnector.closeConnection();
+            // Demo de Statement - GET
+            ArrayList<ContactModel> listContact = contactDao.getContact();
+            for (ContactModel c : listContact) {
+                System.out.println(c);
+            }
 
-            System.out.println("Programa finalizado");
+            // Demo de DatabaseConnector closeConnection
+            //databaseConnector.closeConnection();
+
         } catch (RuntimeException | ClassNotFoundException e) {
             System.err.println("Error en la aplicación: " + e.getMessage());
         }
