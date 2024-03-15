@@ -9,15 +9,13 @@ public class DatabaseConnector {
     private Connection connection = null;
 
     private DatabaseConnector() {
-        instance = new DatabaseConnector();
     }
 
     public static DatabaseConnector getInstance() {
         if (instance == null) {
-            return new DatabaseConnector();
-        } else {
-            return instance;
+            instance = new DatabaseConnector();
         }
+        return instance;
     }
 
     public Connection getConnection() {
