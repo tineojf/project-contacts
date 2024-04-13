@@ -1,8 +1,5 @@
-package main;
-
 import dao.ContactDao;
 import databaseConnector.DatabaseConnector;
-import dotenv.ConfigEnv;
 import models.ContactModel;
 
 import java.sql.Connection;
