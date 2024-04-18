@@ -56,6 +56,6 @@ public class ContactModel {
     // To String
     @Override
     public String toString() {
-        return this.name + " " + this.lastName + " - " + this.phone;
+        return this.name + " " + this.lastName + " - " + this.phone + " - " + this.email;
     }
 }

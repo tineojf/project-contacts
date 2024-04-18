@@ -1,5 +1,9 @@
 package view;
 
+import logic.api.API;
+import persistence.models.ContactModel;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -13,8 +17,8 @@ public class Menu {
         System.out.println("4. Eliminar contacto");
         System.out.println("5. Salir");
 
-        int option = readOption(5);
-        System.out.println("Opción seleccionada: " + option);
+        int option = this.readOption(5);
+        this.executeAction(option);
     }
 
     public int readOption(int limit) {
@@ -34,7 +38,6 @@ public class Menu {
 
         } while (incorrectOption);
 
-        scanner.close();
         return option;
     }
 
@@ -43,6 +46,13 @@ public class Menu {
         switch (option) {
             case 1:
                 System.out.println("Listar contactos");
+                ArrayList<ContactModel> contacts = API.getAllContacts();
+
+                int i = 1;
+                for (ContactModel contact : contacts) {
+                    System.out.println(i + ". " + contact);
+                    i++;
+                }
                 break;
             case 2:
                 System.out.println("Crear contacto");
