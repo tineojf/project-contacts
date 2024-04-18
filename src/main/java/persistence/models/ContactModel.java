@@ -8,12 +8,12 @@ public class ContactModel {
     private String phone;
 
     // Constructor
-    public ContactModel(int id, String name, String lastName, String email, String phone) {
+    public ContactModel(int id, String name, String lastName, String phone, String email) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
-        this.email = email;
         this.phone = phone;
+        this.email = email;
     }
 
     // Getters
