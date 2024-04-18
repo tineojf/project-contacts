@@ -1,4 +1,4 @@
-package dotenv;
+package logic.dotenv;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

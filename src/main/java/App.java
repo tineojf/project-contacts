@@ -1,6 +1,6 @@
-import dao.ContactDao;
-import databaseConnector.DatabaseConnector;
-import models.ContactModel;
+import persistence.dao.ContactDao;
+import persistence.DBConnector;
+import persistence.models.ContactModel;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ public class App {
             //System.out.println(configEnv.get("DATABASE_NAME"));
 
             // Demo de DatabaseConnector
-            DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-            Connection connection = databaseConnector.getConnection();
+            DBConnector dbconnector = DBConnector.getInstance();
+            Connection connection = dbconnector.getConnection();
 
             // Demo de ContactModel
             ContactModel contact = new ContactModel(1, "Juan", "Perez", "999888777", "email@gmail.com");

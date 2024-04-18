@@ -1,19 +1,19 @@
-package databaseConnector;
+package persistence;
 
-import dotenv.ConfigEnv;
+import logic.dotenv.ConfigEnv;
 
 import java.sql.*;
 
-public class DatabaseConnector {
-    private static DatabaseConnector instance;
+public class DBConnector {
+    private static DBConnector instance;
     private Connection connection = null;
 
-    private DatabaseConnector() {
+    private DBConnector() {
     }
 
-    public static DatabaseConnector getInstance() {
+    public static DBConnector getInstance() {
         if (instance == null) {
-            instance = new DatabaseConnector();
+            instance = new DBConnector();
         }
         return instance;
     }

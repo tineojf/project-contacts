@@ -1,4 +1,4 @@
-package models;
+package persistence.models;
 
 public class ContactModel {
     private final int id;

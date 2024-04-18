@@ -1,8 +1,8 @@
-package dao;
+package persistence.dao;
 
-import databaseConnector.DatabaseConnector;
-import dotenv.ConfigEnv;
-import models.ContactModel;
+import persistence.DBConnector;
+import logic.dotenv.ConfigEnv;
+import persistence.models.ContactModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class ContactDao {
     private final String databaseTableContact = ConfigEnv.getInstance().get("DATABASE_TABLE_USERS");
-    private static final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-    private static final Connection connection = databaseConnector.getConnection();
+    private static final DBConnector dbconnector = DBConnector.getInstance();
+    private static final Connection connection = dbconnector.getConnection();
 
     // CRUD - POST
     public void postContact(ContactModel contact) {
@@ -24,7 +24,7 @@ public class ContactDao {
         } catch (Exception e) {
             System.out.println("Insert error: " + e.getMessage());
         } finally {
-            databaseConnector.closeConnection();
+            dbconnector.closeConnection();
         }
     }
 
@@ -48,7 +48,7 @@ public class ContactDao {
         } catch (Exception e) {
             System.out.println("Select error: " + e.getMessage());
         } finally {
-            databaseConnector.closeConnection();
+            dbconnector.closeConnection();
         }
         return contacts;
     }
