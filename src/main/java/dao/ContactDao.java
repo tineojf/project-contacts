@@ -10,12 +10,11 @@ import java.util.ArrayList;
 
 public class ContactDao {
     private final String databaseTableContact = ConfigEnv.getInstance().get("DATABASE_TABLE_USERS");
+    private static final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
+    private static final Connection connection = databaseConnector.getConnection();
 
     // CRUD - POST
     public void postContact(ContactModel contact) {
-        DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-        Connection connection = databaseConnector.getConnection();
-
         String query = "INSERT INTO " + databaseTableContact + " (name, lastname, email, phone) VALUES ('"
                 + contact.getName() + "', '" + contact.getLastName() + "', '"
                 + contact.getEmail() + "', '" + contact.getPhone() + "')";
@@ -30,10 +29,7 @@ public class ContactDao {
     }
 
     // CRUD - GET All
-    public ArrayList<ContactModel> getContact() {
-        DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-        Connection connection = databaseConnector.getConnection();
-
+    public ArrayList<ContactModel> findAll() {
         ArrayList<ContactModel> contacts = new ArrayList<>();
 
         String query = "SELECT * FROM " + databaseTableContact;

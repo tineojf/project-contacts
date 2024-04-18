@@ -12,7 +12,7 @@ public class App {
 
             // Demo de ConfigEnv
             //System.out.println("Hello World!");
-            //ConfigEnv configEnv = ConfigEnv.getInstance();
+            //ConfigEnv confzigEnv = ConfigEnv.getInstance();
             //System.out.println(configEnv.get("DATABASE_NAME"));
 
             // Demo de DatabaseConnector
@@ -26,10 +26,12 @@ public class App {
             ContactDao contactDao = new ContactDao();
 
             // Demo de Statement - POST
-            //contactDao.postContact(contact);
+            //contactDao.create(contact);
 
             // Demo de Statement - GET
-            ArrayList<ContactModel> listContact = contactDao.getContact();
+            ArrayList<ContactModel> listContact = contactDao.findAll();
+
+            System.out.println("\nListado de contactos:");
             for (ContactModel c : listContact) {
                 System.out.println(c);
             }
