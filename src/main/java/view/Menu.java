@@ -45,6 +45,7 @@ public class Menu {
     public void executeAction(int option) {
         switch (option) {
             case 1:
+                System.out.println("--------------------");
                 System.out.println("Listar contactos");
                 ArrayList<ContactModel> contacts = API.getAllContacts();
 
@@ -55,13 +56,32 @@ public class Menu {
                 }
                 break;
             case 2:
+                System.out.println("--------------------");
                 System.out.println("Crear contacto");
+
+                System.out.print("Nombre: ");
+                String name = scanner.nextLine();
+                System.out.print("Apellido: ");
+                String lastName = scanner.nextLine();
+                System.out.print("Email: ");
+                String email = scanner.nextLine();
+                System.out.print("Teléfono: ");
+                String phone = scanner.nextLine();
+
+                ContactModel contact = new ContactModel(1, name, lastName, email, phone);
+                API.post(contact);
                 break;
             case 3:
+                System.out.println("--------------------");
                 System.out.println("Actualizar contacto");
                 break;
             case 4:
+                System.out.println("--------------------");
                 System.out.println("Eliminar contacto");
+
+                System.out.print("ID del contacto a eliminar: ");
+                int id = scanner.nextInt();
+                API.delete(id);
                 break;
             case 5:
                 System.out.println("Salir");

@@ -12,15 +12,27 @@ public class API {
         return contactDao.findAll();
     }
 
-    public void post() {
-        System.out.println("POST request");
+    public static void post(ContactModel contact) {
+        ContactDao contactDao = new ContactDao();
+
+        if (contactDao.create(contact)) {
+            System.out.println("POST - CREATED");
+        } else {
+            System.out.println("POST - NOT CREATED");
+        }
     }
 
-    public void put() {
+    public static void put() {
         System.out.println("PUT request");
     }
 
-    public void delete() {
-        System.out.println("DELETE request");
+    public static void delete(int id) {
+        ContactDao contactDao = new ContactDao();
+
+        if (contactDao.delete(id)) {
+            System.out.println("DELETE - DELETED");
+        } else {
+            System.out.println("DELETE - NOT DELETED");
+        }
     }
 }
