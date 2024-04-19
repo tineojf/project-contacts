@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 public class API {
 
-    public static ArrayList<ContactModel> getAllContacts() {
+    public static ArrayList<ContactModel> get() {
         ContactDao contactDao = new ContactDao();
+        System.out.println("API - GET ALL");
         return contactDao.findAll();
     }
 
@@ -16,23 +17,29 @@ public class API {
         ContactDao contactDao = new ContactDao();
 
         if (contactDao.create(contact)) {
-            System.out.println("POST - CREATED");
+            System.out.println("API - CREATED");
         } else {
-            System.out.println("POST - NOT CREATED");
+            System.out.println("API - NOT CREATED");
         }
     }
 
-    public static void put() {
-        System.out.println("PUT request");
+    public static void put(int id, ContactModel contact) {
+        ContactDao contactDao = new ContactDao();
+
+        if (contactDao.update(id, contact)) {
+            System.out.println("API - UPDATED");
+        } else {
+            System.out.println("API - NOT UPDATED");
+        }
     }
 
     public static void delete(int id) {
         ContactDao contactDao = new ContactDao();
 
         if (contactDao.delete(id)) {
-            System.out.println("DELETE - DELETED");
+            System.out.println("API - DELETED");
         } else {
-            System.out.println("DELETE - NOT DELETED");
+            System.out.println("API - NOT DELETED");
         }
     }
 }

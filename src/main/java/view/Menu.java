@@ -47,7 +47,7 @@ public class Menu {
             case 1:
                 System.out.println("--------------------");
                 System.out.println("Listar contactos");
-                ArrayList<ContactModel> contacts = API.getAllContacts();
+                ArrayList<ContactModel> contacts = API.get();
 
                 int i = 1;
                 for (ContactModel contact : contacts) {
@@ -59,21 +59,18 @@ public class Menu {
                 System.out.println("--------------------");
                 System.out.println("Crear contacto");
 
-                System.out.print("Nombre: ");
-                String name = scanner.nextLine();
-                System.out.print("Apellido: ");
-                String lastName = scanner.nextLine();
-                System.out.print("Email: ");
-                String email = scanner.nextLine();
-                System.out.print("Teléfono: ");
-                String phone = scanner.nextLine();
-
-                ContactModel contact = new ContactModel(1, name, lastName, email, phone);
+                ContactModel contact = inputContactData();
                 API.post(contact);
                 break;
             case 3:
                 System.out.println("--------------------");
                 System.out.println("Actualizar contacto");
+
+                System.out.print("ID del contacto a actualizar: ");
+                int idUpdate = scanner.nextInt();
+
+                ContactModel contactUpdate = inputContactData();
+                API.put(idUpdate, contactUpdate);
                 break;
             case 4:
                 System.out.println("--------------------");
@@ -90,5 +87,23 @@ public class Menu {
                 System.out.println("Opción no válida");
                 break;
         }
+    }
+
+    public ContactModel inputContactData() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nombre: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Apellido: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Teléfono: ");
+        String phone = scanner.nextLine();
+
+        return new ContactModel(1, name, lastName, email, phone);
     }
 }

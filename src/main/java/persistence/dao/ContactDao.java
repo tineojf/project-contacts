@@ -115,4 +115,36 @@ public class ContactDao {
         }
     }
 
+    // CRUD - PUT
+    public boolean update(int id, ContactModel contact) {
+        ContactModel result = findByID(id);
+
+        if (result == null) {
+            return false;
+        }
+
+        String query = "UPDATE " + databaseTableContact + " " +
+                "SET name = ?, lastname = ?, email = ?, phone = ? WHERE id = ? LIMIT 1";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, contact.getName());
+            preparedStatement.setString(2, contact.getLastName());
+            preparedStatement.setString(3, contact.getEmail());
+            preparedStatement.setString(4, contact.getPhone());
+            preparedStatement.setInt(5, id);
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("UPDATE - UPDATED ");
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            System.err.println("UPDATE - Error: " + e.getMessage());
+            return false;
+        } finally {
+            dbconnector.closeConnection();
+        }
+    }
 }
