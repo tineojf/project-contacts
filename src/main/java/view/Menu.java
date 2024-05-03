@@ -4,6 +4,7 @@ import logic.api.API;
 import persistence.models.ContactModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -13,11 +14,12 @@ public class Menu {
         System.out.println("Bienvenido a la agenda de contactos");
         System.out.println("1. Listar contactos");
         System.out.println("2. Crear contacto");
-        System.out.println("3. Actualizar contacto");
-        System.out.println("4. Eliminar contacto");
-        System.out.println("5. Salir");
+        System.out.println("3: Buscar contacto");
+        System.out.println("4. Actualizar contacto");
+        System.out.println("5. Eliminar contacto");
+        System.out.println("6. Salir");
 
-        int option = this.readOption(5);
+        int option = this.readOption(6);
         this.executeAction(option);
     }
 
@@ -64,6 +66,19 @@ public class Menu {
                 break;
             case 3:
                 System.out.println("--------------------");
+                System.out.println("Buscar contacto");
+
+                String search = inputSearchData();
+                ArrayList<ContactModel> contactsSearch = API.search(search);
+
+                int j = 1;
+                for (ContactModel contactSearch : contactsSearch) {
+                    System.out.println(j + ". " + contactSearch);
+                    j++;
+                }
+                break;
+            case 4:
+                System.out.println("--------------------");
                 System.out.println("Actualizar contacto");
 
                 System.out.print("ID del contacto a actualizar: ");
@@ -72,7 +87,7 @@ public class Menu {
                 ContactModel contactUpdate = inputContactData();
                 API.put(idUpdate, contactUpdate);
                 break;
-            case 4:
+            case 5:
                 System.out.println("--------------------");
                 System.out.println("Eliminar contacto");
 
@@ -80,7 +95,7 @@ public class Menu {
                 int id = scanner.nextInt();
                 API.delete(id);
                 break;
-            case 5:
+            case 6:
                 System.out.println("Salir");
                 break;
             default:
@@ -105,5 +120,12 @@ public class Menu {
         String phone = scanner.nextLine();
 
         return new ContactModel(1, name, lastName, email, phone);
+    }
+
+    public String inputSearchData() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Bsuqueda: ");
+        return scanner.nextLine().toLowerCase();
     }
 }

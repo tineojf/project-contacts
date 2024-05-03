@@ -91,6 +91,32 @@ public class ContactDao {
         }
     }
 
+    // CRUD - GET by Name
+    public ArrayList<ContactModel> findByName(String name) {
+        ArrayList<ContactModel> contacts = new ArrayList<>();
+        String query = "SELECT * FROM " + databaseTableContact + " WHERE CONCAT(name, ' ', lastname) LIKE ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + name + "%");
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                contacts.add(new ContactModel(
+                        result.getInt("id"),
+                        result.getString("name"),
+                        result.getString("lastname"),
+                        result.getString("phone"),
+                        result.getString("email")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("GET error: " + e.getMessage());
+        } finally {
+            dbconnector.closeConnection();
+        }
+        return contacts;
+    }
+
     // CRUD - DELETE
     public boolean delete(int id) {
         ContactModel contact = findByID(id);

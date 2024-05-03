@@ -13,6 +13,12 @@ public class API {
         return contactDao.findAll();
     }
 
+    public static ArrayList<ContactModel> search(String name) {
+        ContactDao contactDao = new ContactDao();
+        System.out.println("API - SEARCH");
+        return contactDao.findByName(name);
+    }
+
     public static void post(ContactModel contact) {
         ContactDao contactDao = new ContactDao();
 
