@@ -4,7 +4,6 @@ import logic.api.API;
 import persistence.models.ContactModel;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -49,7 +48,7 @@ public class Menu {
             case 1:
                 System.out.println("--------------------");
                 System.out.println("Listar contactos");
-                ArrayList<ContactModel> contacts = API.get();
+                ArrayList<ContactModel> contacts = API.getContacts();
 
                 int i = 1;
                 for (ContactModel contact : contacts) {
@@ -62,14 +61,14 @@ public class Menu {
                 System.out.println("Crear contacto");
 
                 ContactModel contact = inputContactData();
-                API.post(contact);
+                API.postContact(contact);
                 break;
             case 3:
                 System.out.println("--------------------");
                 System.out.println("Buscar contacto");
 
                 String search = inputSearchData();
-                ArrayList<ContactModel> contactsSearch = API.search(search);
+                ArrayList<ContactModel> contactsSearch = API.searchContacts(search);
 
                 int j = 1;
                 for (ContactModel contactSearch : contactsSearch) {
@@ -85,7 +84,7 @@ public class Menu {
                 int idUpdate = scanner.nextInt();
 
                 ContactModel contactUpdate = inputContactData();
-                API.put(idUpdate, contactUpdate);
+                API.putContact(idUpdate, contactUpdate);
                 break;
             case 5:
                 System.out.println("--------------------");
@@ -93,7 +92,7 @@ public class Menu {
 
                 System.out.print("ID del contacto a eliminar: ");
                 int id = scanner.nextInt();
-                API.delete(id);
+                API.deleteContact(id);
                 break;
             case 6:
                 System.out.println("Salir");

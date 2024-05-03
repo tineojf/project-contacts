@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CategoryDAO {
+public class CategoryDao {
     private final String databaseTableCategory = ConfigEnv.getInstance().get("DATABASE_TABLE_CATEGORY");
     private static final DBConnector dbconnector = DBConnector.getInstance();
     private static final Connection connection = dbconnector.getConnection();
@@ -64,7 +64,7 @@ public class CategoryDAO {
     public CategoryModel findById(int id) {
         CategoryModel category = null;
 
-        String query = "SELECT * FROM " + databaseTableCategory + " WHERE id = ?";
+        String query = "SELECT * FROM " + databaseTableCategory + " WHERE id = ? LIMIT 1";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
@@ -86,12 +86,18 @@ public class CategoryDAO {
     }
 
     // CRUD - PUT
-    public boolean update(CategoryModel category) {
-        String query = "UPDATE " + databaseTableCategory + " SET name = ? WHERE id = ?";
+    public boolean update(int id, CategoryModel category) {
+        CategoryModel categoryFound = findById(id);
+
+        if (categoryFound == null) {
+            return false;
+        }
+
+        String query = "UPDATE " + databaseTableCategory + " SET name = ? WHERE id = ? LIMIT 1";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, category.getName());
-            preparedStatement.setInt(2, category.getId());
+            preparedStatement.setInt(2, id);
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
